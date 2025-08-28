@@ -32,7 +32,7 @@ cardinality_hll = $\frac{hll\_const \cdot m^{2}}{\sum_{i=0}^{m-1} 2^{-\,\text{re
 
 <b><u>Note:</u></b><br>
 <b>hll_const :</b> is evaluated using following switch case block<br>
-
+```cpp
 switch (m) {<br>
     case 16:<br>
         hll_const = 0.673;<br>
@@ -47,9 +47,9 @@ switch (m) {<br>
         hll_const = 0.7213 / (1.0 + (1.079 / m));<br>
         break;<br>
 }<br>
-
+```
 <b>cardinality_hll :</b> In general case forula to evaluate works very precisely but there are some problems that must be handled in case of the provided input set being very small there is a likelihood of an overshoot in cardinality and thus we use small range correction and similary if the input set is very large we must also perform large range correction which is as given below<br>
-
+```cpp
 // This method is stated in the HLL paper<br>
 double pow_2_64 = 18446744073709551616.0;<br>
 double neg_pow_2_64 = -18446744073709551616.0;<br>
@@ -66,7 +66,7 @@ if (cardinality_temp <= 2.5 * m) { // small range correction -> by shifting to l
 } else if (cardinality_temp > (1.0 / 30.0) * pow_2_64) { // large range correction<br>
     cardinality_temp = neg_pow_2_64 * log(1.0 - (cardinality_temp / pow_2_64));<br>
 }<br>
-
+```
 As for the hashing used in HLL any hashing algorithm works as long as it has randomness and uniqueness preferably Murmurhash variants, SHA-1, etc. These are simple non cryptographic algos for hashes and preety simple to implement though I think you can use cryptographic ones but I believe it would be an overkill.<br>
 
-I tried to go through the simple implementation part of HLL. For more details read through the offical paper and wikepedia pages to get a better understanding<br>
+I tried to go through the simple implementation part of HLL. For more details read through the offical paper and Wikipedia pages to get a better understanding<br>
