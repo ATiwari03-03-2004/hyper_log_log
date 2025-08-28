@@ -28,7 +28,7 @@ registers = [0, 3, 0, 0, 0, 0, 0, 0]<br>
 This procedure occurs for every input string provides and register gets automatically updated depending on position of 1 in the reamaing 64 - b (bits).<br>
 
 Now, comes the real deal, which is evaluating the cardinality, to do this we use a very simple formula<br>
-cardinality_hll = $\frac{hll\_const \cdot m^{2}}{\sum_{i=0}^{m-1} 2^{-\,\text{registers}[i]}}$<br>
+cardinality_hll = $\frac{hll\_const \cdot m^{2}}{\sum_{i=0}^{m-1} 2^{-\text{registers}[i]}}$<br>
 
 <b><u>Note:</u></b><br>
 <b>hll_const :</b> is evaluated using following switch case block<br>
@@ -70,3 +70,4 @@ if (cardinality_temp <= 2.5 * m) { // small range correction -> by shifting to l
 As for the hashing used in HLL any hashing algorithm works as long as it has randomness and uniqueness preferably Murmurhash variants, SHA-1, etc. These are simple non cryptographic algos for hashes and preety simple to implement though I think you can use cryptographic ones but I believe it would be an overkill.<br>
 
 I tried to go through the simple implementation part of HLL. For more details read through the offical paper and Wikipedia pages to get a better understanding<br>
+
