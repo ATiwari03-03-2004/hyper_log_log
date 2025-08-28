@@ -5,7 +5,7 @@
 #ifndef MURMURHASH_H
 #define MURMURHASH_H
 
-namespace murmurhash_64 {
+namespace mhash_64 {
     class MurmurHash {
     private:
         const uint64_t m;

@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include "../includes/MurmurHash.h"
-using namespace murmurhash_64;
+using namespace mhash_64;
 
 std::vector<uint64_t> MurmurHash::get_blocks(std::string& input) {
     std::vector<uint64_t> blocks;
